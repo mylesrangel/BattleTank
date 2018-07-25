@@ -5,8 +5,6 @@
 #include "BattleTank.h"
 
 
-
-
 void ATankPlayerController::BeginPlay() {
 
 	Super::BeginPlay();
@@ -22,12 +20,28 @@ void ATankPlayerController::BeginPlay() {
 
 }
 
+void ATankPlayerController::Tick(float DeltaTime) {
+
+	Super::Tick(DeltaTime);
+
+	AimTowardCrosshair();
+
+}
+
+void ATankPlayerController::AimTowardCrosshair() {
+
+	if (!GetControlledTank()) { return; }
+
+	//get world location linetrace through crosshair
+	//if it hits the landscape
+		//tell the controlled tank to aim at this point
+
+
+}
+
 ATank* ATankPlayerController::GetControlledTank() const {
 
 	return Cast<ATank>(GetPawn());
 }
-
-
-
 
 
