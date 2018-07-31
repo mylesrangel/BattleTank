@@ -43,7 +43,7 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 
 	bool GetLookVectorHitLocation(FVector, FVector&) const;
 
-	bool GetLookDirection(FVector2D, FVector) const;
+	bool GetLookDirection(FVector2D, FVector&) const;
 
 
 	

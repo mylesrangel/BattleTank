@@ -20,9 +20,31 @@ void ATankAIController::BeginPlay()
 
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Controlled AI Tank sees %s"), *TankAiSpotted->GetName())
 
+		/*if (AimAt(TankAiSpotted->GetActorLocation())) {
+			UE_LOG(LogTemp, Warning, TEXT("Controlled AI Tank is aiming at %s"), *TankAiSpotted->GetName())
+		}*/
 	}
+
+}
+
+void ATankAIController::Tick(float DeltaTime){
+
+	Super::Tick(DeltaTime);
+
+
+	if (GetPlayerTank()) {
+
+		//Move Towards the player
+
+		//aim at the player
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
+		//fire when ready
+		
+	}
+
+
 
 }
 
