@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
@@ -16,9 +17,16 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	//UFunction(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UTankAimingComponent* TankAimingComponent = nullptr;
+
+
 
 public:	
 	// Called every frame

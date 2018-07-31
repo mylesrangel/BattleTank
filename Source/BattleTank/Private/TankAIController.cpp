@@ -20,10 +20,6 @@ void ATankAIController::BeginPlay()
 
 	}
 	else {
-
-		/*if (AimAt(TankAiSpotted->GetActorLocation())) {
-			UE_LOG(LogTemp, Warning, TEXT("Controlled AI Tank is aiming at %s"), *TankAiSpotted->GetName())
-		}*/
 	}
 
 }
