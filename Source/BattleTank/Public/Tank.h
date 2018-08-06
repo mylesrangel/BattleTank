@@ -17,7 +17,7 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	//UFunction(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 protected:
