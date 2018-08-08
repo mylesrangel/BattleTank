@@ -2,12 +2,16 @@
 
 #pragma once
 
-#include "Tank.h"
+
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+//#include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
+//This class is included at the top. TESTING
+class APawn;
+
+class ATank;
 /**
  * 
  */

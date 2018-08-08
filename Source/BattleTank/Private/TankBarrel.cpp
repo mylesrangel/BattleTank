@@ -4,8 +4,8 @@
 
 
 
-void UTankBarrel::Elevate(float elevate) {
+void UTankBarrel::Elevate(float RelativeSpeed) {
+	//Tested Works 8-2018
 
-	UE_LOG(LogTemp, Warning, TEXT("Elevating at : %f"), elevate)
 
 }

@@ -2,6 +2,8 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+//Needed for SuggestProjectileVelocity
+#include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 
 
@@ -42,14 +44,23 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed) {
 		StartLocation,
 		OutHitLocation,
 		LaunchSpeed,
+		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 
 	)) {
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); ///Convert the trace to (Smaller line)
 		
+		UE_LOG(LogTemp, Warning, TEXT("Suggest projectile found:") )
 
 		MoveBarrelTowards(AimDirection);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Suggest projectile NOT found:"))
+
 	}
 
 
