@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
 #include "Engine/World.h"
 
 
@@ -16,34 +17,63 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
 
 }
 
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed) {
+
+	
+
+	if (!Barrel) { return; }
+
+	FVector OutLaunchVelocity;
+	///startlocation of projectile (added a socket to the barrel)
+	FVector StartLocation = Barrel->GetSocketLocation(FName ("Projectile"));
+
+
+	///Gets projectile trace (geometry on firing a tank round)
+	if (UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		OutHitLocation,
+		LaunchSpeed,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+
+	)) {
+		auto TankName = GetOwner()->GetName();
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); ///Convert the trace to (Smaller line)
+		
+
+		MoveBarrelTowards(AimDirection);
+	}
+
+
 }
 
-void UTankAimingComponent::AimAt(FVector OutHitLocation) {
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 
-	auto OurTankName = GetOwner()->GetName();
-	auto BarrelLocation = Barrel->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s"), *OurTankName, *OutHitLocation.ToString(), *BarrelLocation)
+	///difference between current barrel location and where we want to aim
+
+	//Yaw, Pitch and roll of the barrel at the current moment
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+
+	//Yaw, Pitch and roll of the barrel at where we want to aim
+	auto AimAsRotator = AimDirection.Rotation();
+
+	//Difference between where we want to aim and where we are currently aiming
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+
+
+	//move barrel proper amount per frame (Speed of turret)
+	//given a max elevation, speed, and time frame
+
+	Barrel->Elevate(5.f);
+
+
 }
 
