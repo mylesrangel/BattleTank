@@ -52,15 +52,8 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed) {
 	)) {
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); ///Convert the trace to (Smaller line)
-		
-		UE_LOG(LogTemp, Warning, TEXT("Suggest projectile found:") )
-
+	
 		MoveBarrelTowards(AimDirection);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Suggest projectile NOT found:"))
-
 	}
 
 
@@ -83,7 +76,9 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	//move barrel proper amount per frame (Speed of turret)
 	//given a max elevation, speed, and time frame
 
-	Barrel->Elevate(5.f);
+	//UE_LOG(LogTemp, Warning, TEXT("%f Elevation is: %s"), GetWorld()->RealTimeSeconds, BarrelRotator.Pitch)
+
+	Barrel->Elevate(DeltaRotator.Pitch);
 
 
 }
