@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 //Needed for SuggestProjectileVelocity
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
@@ -22,6 +23,11 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
+
+}
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
 
 }
 
