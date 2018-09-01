@@ -58,9 +58,8 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed) {
 		ESuggestProjVelocityTraceOption::DoNotTrace
 
 	)) {
-		auto TankName = GetOwner()->GetName();
+
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); ///Convert the trace to (Smaller line)
-	
 		MoveBarrelTowards(AimDirection);
 	}
 
