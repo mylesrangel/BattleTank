@@ -34,8 +34,8 @@ void AProjectile::LaunchProjectile(float Speed) {
 
 
 
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Projectile Fires at %f"), Time, Speed)
+	//auto Time = GetWorld()->GetTimeSeconds();
+	//UE_LOG(LogTemp, Warning, TEXT("%f: Projectile Fires at %f"), Time, Speed)
 	///set the velocity of projectile
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
 	///activate projectile
